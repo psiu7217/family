@@ -38,7 +38,9 @@
                         <x-dropdown-link :href="route('user.index')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
-
+                        <x-dropdown-link :href="route('user.edit', Auth::user()->id)">
+                            {{ __('Edit') }}
+                        </x-dropdown-link>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
 

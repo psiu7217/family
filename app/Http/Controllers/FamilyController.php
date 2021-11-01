@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Family;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class UserController extends Controller
+class FamilyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-//        $user = User::find(1);
-//        dd($user->family);
-//        dd(Auth::user()->family()->name);
-        return view('user.index');
+        //
     }
 
     /**
@@ -29,7 +27,6 @@ class UserController extends Controller
     public function create()
     {
         //
-        dd('create');
     }
 
     /**
@@ -40,8 +37,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        dd('store');
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $family_id = Family::create($request->all())->id;
+
+        User::find(Auth::user()->id)->update(['family_id' => $family_id]);
+
+        return redirect()->route('user.index')->with('success', 'Family created successfully');
     }
 
     /**
@@ -52,7 +56,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        dd('show');
+        //
     }
 
     /**
@@ -63,7 +67,7 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        return view('user.edit');
+        //
     }
 
     /**
@@ -75,13 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name'          => 'required',
-        ]);
-
-        User::find($id)->update($request->all());
-
-        return redirect()->route('user.edit', $id)->with('status','Post updated successfully');
+        //
     }
 
     /**

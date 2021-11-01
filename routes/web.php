@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FamilyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth'])->group(function () {
     Route::resources([
         'user' => UserController::class,
-//    'posts' => PostController::class,
+        'family' => FamilyController::class,
     ]);
 
 //    Route::resource('users', UserController::class)->name('get', 'users');
